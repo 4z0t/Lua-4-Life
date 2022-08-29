@@ -1,7 +1,9 @@
 
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
-project(emlua)
+project(testlib)
+
+# option(USE_STATIC "Use static libtrary" ON)
 
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
 set(WIN64 true)
@@ -19,22 +21,17 @@ message(STATUS "32 bit build")
     set(LUA_LIB "${PROJECT_SOURCE_DIR}/../../Lua/lua-5.4.2_Win32/")
 endif()
 
-add_executable(emlua
+add_library(testlib SHARED
 
-    main.cpp
-
+    "main.c"
     ${LUA_LIB}/include/lua.h
-    ${LUA_LIB}/include/lualib.h
     ${LUA_LIB}/include/lauxlib.h
     )
 message("linking ${LUA_LIB}")
-target_link_libraries(emlua ${LUA_LIB}/liblua54.a)
+target_link_libraries(testlib PUBLIC ${LUA_LIB}/liblua54.a)
 
 set(LUA_DLL_NAME "lua54.dll")
 set(LUA_DLL "${LUA_LIB}/${LUA_DLL_NAME}")
 
-set(LUA_SCRIPT_NAME "script.lua")
-
 
 file(COPY ${LUA_DLL} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-file(COPY ${LUA_SCRIPT_NAME} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
