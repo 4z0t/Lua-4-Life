@@ -7,10 +7,13 @@
 #include <SFML/Graphics.hpp>
 #include "Lua.hpp"
 
+
+
 using namespace Lua;
 
 int main(int argc, char *argv[])
 {
+    
     char *path = nullptr;
     for (int i = 0; i < argc; i++)
     {

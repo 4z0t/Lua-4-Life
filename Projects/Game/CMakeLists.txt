@@ -28,5 +28,20 @@ find_package(Lua REQUIRED)
 target_link_libraries(${CMAKE_PROJECT_NAME}  ${LUA_LIBRARIES})
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${LUA_INCLUDE_DIR})
 
+find_package(glfw3 CONFIG REQUIRED)
+target_link_libraries(${CMAKE_PROJECT_NAME}  glfw)
+
+
+
+find_package(glbinding CONFIG REQUIRED)
+target_link_libraries(${CMAKE_PROJECT_NAME}  glbinding::glbinding)
+
+find_package(GLEW REQUIRED)
+target_link_libraries(${CMAKE_PROJECT_NAME}   GLEW::GLEW)
+
+find_package(glm CONFIG REQUIRED)
+target_link_libraries(${CMAKE_PROJECT_NAME}  glm)
+
+
 set(LUA_SCRIPT_NAME "script.lua")
 file(COPY ${LUA_SCRIPT_NAME} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
